@@ -7,19 +7,29 @@ import './style.css'; // Ensure you import your styles
 const App = () => {
     const [bannerData, setBannerData] = useState(null);
     const [isBannerVisible, setIsBannerVisible] = useState(false); // Manage banner visibility
-    const [isDashboardVisible, setIsDashboardVisible] = useState(false); // Manage dashboard visibility
+    const [isDashboardVisible, setIsDashboardVisible] = useState(true); // Manage dashboard visibility by default
 
     useEffect(() => {
         const fetchBanner = async () => {
-            const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/banner`);
-            setBannerData(response.data);
+            try {
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/banner`);
+                setBannerData(response.data);
+                setIsBannerVisible(!!response.data.visible); // Set visibility based on response
+            } catch (error) {
+                console.error("Error fetching banner:", error);
+            }
         };
         fetchBanner();
     }, []);
 
     const handleUpdate = async (updatedBanner) => {
-        const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/banner`, updatedBanner);
-        setBannerData(response.data);
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/banner`, updatedBanner);
+            setBannerData(response.data);
+            setIsBannerVisible(true); // Show the banner when updated
+        } catch (error) {
+            console.error("Error updating banner:", error);
+        }
     };
 
     const handleShowBanner = () => {
@@ -44,9 +54,10 @@ const App = () => {
 
     return (
         <div className="p-4">
-            {isBannerVisible && (
+            {isBannerVisible && bannerData && (
                 <Banner 
                     visible={isBannerVisible} // Pass the visibility state to Banner
+                    title={bannerData?.title} // Use title
                     description={bannerData?.description} 
                     timer={bannerData?.timer} 
                     link={bannerData?.link} 

@@ -14,8 +14,10 @@ generator client {
 }
 
 model Banner {
-    id          Int      @id @default(autoincrement())
+    id          Int     @id @default(autoincrement())
+    title       String
     description String
-    timer       Int
+    timer       Int     // or the type you defined for the timer
     link        String
+    visible     Boolean
 }

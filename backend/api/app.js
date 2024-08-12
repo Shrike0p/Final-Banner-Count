@@ -10,19 +10,29 @@ app.use(express.json());
 
 // Get Banner Details
 app.get('/api/banner', async (req, res) => {
-    const banner = await prisma.banner.findFirst();
-    res.json(banner);
+    try {
+        const banner = await prisma.banner.findFirst();
+        res.json(banner);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error fetching banner details' });
+    }
 });
 
 // Update Banner Details
 app.post('/api/banner', async (req, res) => {
-    const { description, timer, link } = req.body;
-    const updatedBanner = await prisma.banner.upsert({
-        where: { id: 1 },
-        update: { description, timer, link },
-        create: { description, timer, link },
-    });
-    res.json(updatedBanner);
+    const { title, description, timer, link, visible } = req.body; // Include title and visibility
+    try {
+        const updatedBanner = await prisma.banner.upsert({
+            where: { id: 1 },
+            update: { title, description, timer, link, visible }, // Update visibility and title
+            create: { title, description, timer, link, visible }, // Create with title and visibility
+        });
+        res.json(updatedBanner);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error updating banner details' });
+    }
 });
 
 // Change the port to the one provided by Vercel
