@@ -19,8 +19,8 @@ const Dashboard = ({ onUpdate, onToggleBanner, isBannerVisible }) => {
             setError('Timer must be a positive number');
             return;
         }
-        if (!link.startsWith('https://www.')) {
-            setError('Link must start with "https://www."');
+        if (!link.startsWith('https://')) {
+            setError('Link must start with "https://"');
             return;
         }
 
@@ -54,7 +54,7 @@ const Dashboard = ({ onUpdate, onToggleBanner, isBannerVisible }) => {
                     type="text"
                     value={link}
                     onChange={e => setLink(e.target.value)}
-                    placeholder="Banner Link (must start with https://www.)"
+                    placeholder="Banner Link (must start with https://)"
                     className="border border-gray-300 p-2 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <button type="submit" className="w-full bg-blue-500 text-white font-semibold py-2 rounded-lg shadow hover:bg-blue-600 transition duration-300">

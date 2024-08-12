@@ -11,14 +11,14 @@ const App = () => {
 
     useEffect(() => {
         const fetchBanner = async () => {
-            const response = await axios.get('${process.env.REACT_APP_API_URL}/api/banner');
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/banner`);
             setBannerData(response.data);
         };
         fetchBanner();
     }, []);
 
     const handleUpdate = async (updatedBanner) => {
-        const response = await axios.post('${process.env.REACT_APP_API_URL}/api/banner', updatedBanner);
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/banner`, updatedBanner);
         setBannerData(response.data);
     };
 
