@@ -33,8 +33,8 @@ const Dashboard = ({ onUpdate, onToggleBanner, isBannerVisible }) => {
 
         const totalSeconds = (days * 24 * 3600) + (hours * 3600) + (minutes * 60);
         
-        // Pass title and formatted description
-        onUpdate({ title, description, timer: totalSeconds, link });
+        // Pass title, formatted description, timer, link, and visibility status
+        onUpdate({ title, description, timer: totalSeconds, link, visible: isBannerVisible });
         
         // Clear the input fields after update
         setTitle('');
