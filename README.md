@@ -1,4 +1,5 @@
 
+
 # Banner Count Dashboard
 
 ## Overview
@@ -30,26 +31,66 @@ The Banner Count Dashboard is a dynamic one-page application built with React.js
 ```
     
 3.  Install the dependencies:
-    
- ```bash
-   npm install 
- ```
-    
-4.  Start the development server:
+```bash
+npm install
+```
+5.  Start the development server:
     
     ```bash
     npm start
     ```
     
-5.  Open your browser and go to `http://localhost:3000` to view the application.
+6.  Open your browser and go to `http://localhost:3000` to view the application.
     
 
 ## Usage
 
-1.  Use the input fields to set the banner title, description, countdown timer, and link.
-2.  Utilize the formatting buttons to customize the description.
-3.  Click on "Update Banner" to save changes.
-4.  Toggle the visibility of the banner using the checkbox.
+ -  Use the input fields to set the banner title, description, countdown timer, and link.
+ -  Utilize the formatting buttons to customize the description.
+ -  Click on "Update Banner" to save changes.
+ -  Toggle the visibility of the banner using the checkbox.
+## API Endpoints
+Backend Apis might take 5-10 seconds to respond for first request.
+
+ ### 1. Get Banner Details
+ -   **Endpoint**: `/api/banner`
+-   **Method**: `GET`
+-   **Description**: Retrieves the current banner details.
+	 ```bash
+	 https://final-banner-count-backend.onrender.com/api/banner
+	 ```
+
+##### Example Response:-
+```json
+{ 
+	"id": 1, 
+	"title": "Welcome Banner", 
+	"description": "This is the welcome banner.", 
+	"timer": "30", 
+	"link": "https://example.com", 
+	"visible": true 
+}
+```
+### 2. Update Banner Details
+
+-   **Endpoint**: `/api/banner`
+-   **Method**: `POST`
+-   **Description**: Updates or creates the banner details.
+	 ```bash
+	 https://final-banner-count-backend.onrender.com/api/banner
+	 ```
+
+#####  Request Body:-
+```json
+{ 
+	"title": "New Banner Title", 
+	"description": "This is the updated banner description.", 
+	"timer": "60", 
+	"link": "https://newlink.com", 
+	"visible": true
+}
+```
+
 
 ## Contribution
 
